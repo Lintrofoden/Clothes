@@ -33,9 +33,9 @@
     
     <script>
 
-        window.onload = function() {
-            changeBackground();
-        }
+        // window.onload = function() {
+        //     changeBackground();
+        // }
 
         let canvas = new fabric.Canvas('c');
 
@@ -52,6 +52,8 @@
         for(let i = 0; i < a.length; i++){
             a[i].addEventListener("click", changeBackground);
         }
+        
+        canvas.setBackgroundImage('../img/asd.jpg', canvas.renderAll.bind(canvas));
 
         //Задаем стартовый задний фон задний фон
         canvas.setBackgroundImage('../img/red.jpg', canvas.renderAll.bind(canvas));
