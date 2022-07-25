@@ -1,0 +1,59 @@
+#background{
+    background-repeat: no-repeat;
+    background-size: 600px;
+    background-position-x: center;
+    width: 800px;
+    height: 600px;
+}
+
+.redBackground{
+    background: url(img/red.jpg);
+}
+
+.yellowBackground{
+    background: url(img/yellow.jpg);
+}
+
+#colors{
+    display: flex;
+    gap: 10px;
+}
+
+.selected{
+    border-color: black;
+}
+
+.item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 3px solid lightgray;
+
+}
+
+.insides{
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+}
+
+.possible-changes{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.list-of-furnituries{
+    display: flex;
+    gap: 10px;
+}
+
+.furniture{
+    width: 30px;
+    height: 30px;
+    border: 3px solid lightgray;
+    border-radius: 5px;
+}

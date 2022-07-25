@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="fabric.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="possible-changes">
+        <canvas id="c" width="474" height="527" style="border: 1px solid grey;"></canvas>
+        <div>
+            <p>Цвет:</p>
+            <div id="colors">
+                <div id="red" class="item"><div style="background-color: red;" class="insides"></div></div>
+                <div id="yellow" class="item"><div style="background-color: yellow;" class="insides"></div>
+                <!-- <div id="yellow" class="item"><div class="yellow"></div></div></div> -->
+            </div>
+        </div>
+        <div>
+            <p>Фурнитура:</p>
+            <div class="list-of-furnituries">
+                <img src="img/x-solid.svg" alt="" id="x" draggable="true" class="furniture">
+                <img src="img/vorotnik.jpg" alt="" id="vorotnik" draggable="true" class="furniture">
+                <img src="img/karman.jpg" alt="" id="karman" draggable="true" class="furniture">
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script>
+
+        window.onload = function() {
+            changeBackground();
+        }
+
+        let canvas = new fabric.Canvas('c');
+
+        let img = "";
+
+        let imgs = [];
+
+        // let selected = "null";
+        let selected = document.getElementById('red');
+
+        //для смены заднего фона
+        let a = document.getElementsByClassName("item");
+
+        for(let i = 0; i < a.length; i++){
+            a[i].addEventListener("click", changeBackground);
+        }
+
+        //Задаем стартовый задний фон задний фон
+        canvas.setBackgroundImage('../img/red.jpg', canvas.renderAll.bind(canvas));
+
+        //делаем добавление на canvas
+        document.addEventListener("drop", changeCanvas);
+
+        //Сохранение названия добаляемого предмета
+        document.getElementById("vorotnik").addEventListener("dragstart", function(evt){
+            img = "vorotnik";
+        });
+
+        document.getElementById("karman").addEventListener("dragstart", function(evt){
+            img = "karman";
+        });
+
+        document.addEventListener("dragend", function(evt){
+            img = "";
+        });
+
+        function changeCanvas(){
+            if(img == ""){
+                clear();
+            }
+            else{
+                add();
+            }
+        }
+
+        function add(){
+            event.preventDefault();
+            fabric.Image.fromURL("img/" + img + ".jpg", function(img){
+                img.scale(0.15);
+                canvas.add(img);
+                imgs.push(img);
+            });
+        }
+
+        function clear(){
+            imgs.forEach(function(item, i) {
+                canvas.remove(item);
+            });
+            imgs.length = 0;
+        }
+
+        function changeBackground(){
+            if(String(this.id) == "undefined"){
+                canvas.setBackgroundImage('../img/red.jpg', canvas.renderAll.bind(canvas));
+                selected.style = 'border-color: black;';
+            }
+            else{
+                if(selected != "null"){
+                    selected.style = '';
+                }
+                // selected.classList.add("selected");
+                selected = this;
+                selected.style = 'border-color: black;';
+                canvas.setBackgroundImage('../img/'+ this.id +'.jpg', canvas.renderAll.bind(canvas));
+            }
+        }
+    </script>
+</body>
+</html>
